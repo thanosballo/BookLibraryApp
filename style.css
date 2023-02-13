@@ -86,7 +86,7 @@ section{
 }
 .card{
     background-color: #d6d3d1;
-    width: 200px;
+    width: 100%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
