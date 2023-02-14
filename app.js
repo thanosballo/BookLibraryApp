@@ -1,53 +1,69 @@
 "use strict";
 let myLibrary = [];
 class Book {
-    constructor(title, author, pages, status) {
+    constructor(title, author, pages, status, id) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.status = status;
+        this.id = id;
     }
 }
-const dummyBook = new Book("Lord of the rings", "Tolkin", 690, true);
-const dadaBook = new Book("War and peace", "Tolstoi", 222, true);
-console.log(dummyBook);
 const showcase = document.querySelector(".showcase");
-createBookCard(dummyBook);
-createBookCard(dadaBook);
-myLibrary.push(dummyBook);
-myLibrary.push(dadaBook);
-console.log(myLibrary);
 function createBookCard(a) {
-    let cardtitle = a.title;
-    let cardauthor = a.author;
-    let cardpages = a.pages;
     const card = document.createElement("div");
     card.classList.add("card");
-    showcase.appendChild(card);
     const info_title = document.createElement("p");
-    info_title.textContent = cardtitle;
+    info_title.textContent = a.title;
     const info_author = document.createElement("p");
-    info_author.textContent = cardauthor;
+    info_author.textContent = a.author;
     const info_pages = document.createElement("p");
-    info_pages.textContent = cardpages.toString();
+    info_pages.textContent = a.pages.toString();
+    const info_id = document.createElement("p");
+    info_id.textContent = a.id.toString();
+    const button = document.createElement("button");
+    button.textContent = "delete";
+    button.classList.add("delete-button");
+    button.setAttribute("data-id", a.id.toString());
+    showcase.appendChild(card);
     card.appendChild(info_title);
     card.appendChild(info_author);
     card.appendChild(info_pages);
+    card.appendChild(info_id);
+    card.appendChild(button);
 }
 ;
 function arrayLoop(array) {
     array.forEach(function (Book) {
-        console.log(Book);
+        createBookCard(Book);
     });
 }
 ;
-const button = document.querySelector("button");
+function clearAll() {
+    showcase.innerHTML = "";
+}
+let counter;
+const button = document.querySelector(".add-button");
 button.addEventListener("click", () => {
+    clearAll();
     let domtitle = document.querySelector("#textInput").value;
     let domauthor = document.querySelector("#authorInput").value;
     let dompages = document.querySelector("#numberInput").value;
-    let newBook = new Book(domtitle, domauthor, +dompages, true);
-    createBookCard(newBook);
+    counter = myLibrary.length;
+    let newBook = new Book(domtitle, domauthor, +dompages, true, counter);
     myLibrary.push(newBook);
     arrayLoop(myLibrary);
+    const deleteButton = document.querySelectorAll(".delete-button");
+    console.log(deleteButton);
+    deleteButton.forEach((item) => {
+        item.addEventListener("click", () => {
+            var _a;
+            console.log(myLibrary);
+            let x = item.getAttribute("data-id");
+            console.log(x);
+            let removeditem = myLibrary.splice(+x, 1);
+            console.log(myLibrary);
+            (_a = item.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
+        });
+    });
 });
