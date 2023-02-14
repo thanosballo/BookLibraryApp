@@ -67,3 +67,11 @@ button.addEventListener("click", () => {
         });
     });
 });
+let searchstring = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae consequatur itaque facilis? Officia repudiandae natus eaque, distinctio tempora alias eos omnis! Aliquid iste earum expedita.";
+let word = "thanais";
+let exp = new RegExp(`${word}`, "i");
+if (searchstring.search(exp) == -1) {
+    console.log("not found");
+}
+else
+    console.log("found");
