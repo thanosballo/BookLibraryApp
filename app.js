@@ -1,11 +1,10 @@
 "use strict";
 let myLibrary = [];
 class Book {
-    constructor(title, author, pages, status, id) {
+    constructor(title, author, pages, id) {
         this.title = title;
         this.author = author;
         this.pages = pages;
-        this.status = status;
         this.id = id;
     }
 }
@@ -25,11 +24,20 @@ function createBookCard(a) {
     button.textContent = "delete";
     button.classList.add("delete-button");
     button.setAttribute("data-id", a.id.toString());
+    const label = document.createElement("label");
+    label.classList.add("switch");
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    const span = document.createElement("span");
+    span.classList.add("slider");
+    label.appendChild(input);
+    label.appendChild(span);
     showcase.appendChild(card);
     card.appendChild(info_title);
     card.appendChild(info_author);
     card.appendChild(info_pages);
     card.appendChild(info_id);
+    card.appendChild(label);
     card.appendChild(button);
 }
 ;
@@ -50,11 +58,10 @@ button.addEventListener("click", () => {
     let domauthor = document.querySelector("#authorInput").value;
     let dompages = document.querySelector("#numberInput").value;
     counter = myLibrary.length;
-    let newBook = new Book(domtitle, domauthor, +dompages, true, counter);
+    let newBook = new Book(domtitle, domauthor, +dompages, counter);
     myLibrary.push(newBook);
     arrayLoop(myLibrary);
     const deleteButton = document.querySelectorAll(".delete-button");
-    console.log(deleteButton);
     deleteButton.forEach((item) => {
         item.addEventListener("click", () => {
             var _a;
