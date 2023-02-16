@@ -58,20 +58,10 @@ button.addEventListener("click", () => {
     deleteButton.forEach((item) => {
         item.addEventListener("click", () => {
             var _a;
-            console.log(myLibrary);
             let x = item.getAttribute("data-id");
-            console.log(x);
-            let removeditem = myLibrary.splice(+x, 1);
-            console.log(myLibrary);
+            let index = myLibrary.findIndex(Book => Book.id === (+x));
+            myLibrary.splice(index, 1);
             (_a = item.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
         });
     });
 });
-let searchstring = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae consequatur itaque facilis? Officia repudiandae natus eaque, distinctio tempora alias eos omnis! Aliquid iste earum expedita.";
-let word = "thanais";
-let exp = new RegExp(`${word}`, "i");
-if (searchstring.search(exp) == -1) {
-    console.log("not found");
-}
-else
-    console.log("found");

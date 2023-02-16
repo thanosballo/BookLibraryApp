@@ -65,18 +65,11 @@ button.addEventListener("click",()=>{
     console.log(deleteButton);
     deleteButton.forEach((item)=>{ 
     item.addEventListener("click",()=>{
-        console.log(myLibrary);
-      let x = item.getAttribute("data-id")!;
-      console.log(x);
-      let removeditem=myLibrary.splice(+x,1);
-      console.log(myLibrary);
+      let x= item.getAttribute("data-id")!;
+      let index=myLibrary.findIndex(Book=>Book.id===(+x));
+      myLibrary.splice(index,1);
       item.parentElement?.remove();
     });   
 });
 });
-let searchstring="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae consequatur itaque facilis? Officia repudiandae natus eaque, distinctio tempora alias eos omnis! Aliquid iste earum expedita.";
-let word="thanais";
-let exp=new RegExp(`${word}`,"i");
-if (searchstring.search(exp)== -1){
-    console.log("not found");
-} else console.log("found");
+
